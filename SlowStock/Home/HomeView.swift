@@ -1,0 +1,55 @@
+//
+//  HomeView.swift
+//  SlowStock
+//
+//  Created by mac on 9/18/26.
+//
+
+import UIKit
+import SnapKit
+
+class HomeView: UIView {
+    private let homeNavBar = HomeNavBar()
+    private let stockTableView = UITableView()
+    private let titleLabel = UILabel()
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        configureUI()
+        configureLayout()
+    }
+    
+    // 해당 view는 Storyboard로 생성되는 방식을 지원하지 않는다는 뜻
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
+extension HomeView {
+    
+    private func configureUI() {
+        stockTableView.rowHeight = 110
+        stockTableView.separatorStyle = .singleLine
+        stockTableView.separatorColor = .systemGray5
+        stockTableView.backgroundColor = .systemBackground
+        
+        addSubview(homeNavBar)
+        addSubview(stockTableView)
+        
+        backgroundColor = .white
+    }
+    
+    private func configureLayout() {
+        homeNavBar.snp.makeConstraints {
+            $0.top.equalTo(safeAreaLayoutGuide)
+            $0.horizontalEdges.equalTo(safeAreaLayoutGuide).inset(20)
+            $0.height.equalTo(50)
+        }
+        
+        stockTableView.snp.makeConstraints {
+            $0.top.equalTo(homeNavBar.snp.bottom).offset(20)
+            $0.horizontalEdges.bottom.equalToSuperview()
+        }
+    }
+}
