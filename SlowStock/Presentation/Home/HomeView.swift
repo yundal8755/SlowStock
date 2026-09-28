@@ -9,9 +9,10 @@ import UIKit
 import SnapKit
 
 class HomeView: UIView {
+    
     private let homeNavBar = HomeNavBar()
-    private let stockTableView = UITableView()
-    private let titleLabel = UILabel()
+    
+    let stockTableView = UITableView()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -26,21 +27,24 @@ class HomeView: UIView {
     }
 }
 
+
+// MARK: - UI Logic
+
 extension HomeView {
     
     private func configureUI() {
-        stockTableView.rowHeight = 110
+        backgroundColor = .white
+
+        stockTableView.rowHeight = 80
         stockTableView.separatorStyle = .singleLine
         stockTableView.separatorColor = .systemGray5
-        stockTableView.backgroundColor = .systemBackground
         
         addSubview(homeNavBar)
         addSubview(stockTableView)
-        
-        backgroundColor = .white
     }
     
     private func configureLayout() {
+        
         homeNavBar.snp.makeConstraints {
             $0.top.equalTo(safeAreaLayoutGuide)
             $0.horizontalEdges.equalTo(safeAreaLayoutGuide).inset(20)

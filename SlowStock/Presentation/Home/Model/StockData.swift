@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Stock {
+struct StockData {
     let ticker: String
     let price: String
     let change: String
