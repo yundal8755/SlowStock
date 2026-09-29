@@ -8,9 +8,9 @@
 import UIKit
 import SnapKit
 
-class HomeView: UIView {
+class 3: UIView {
     
-    private let homeNavBar = HomeNavBar()
+    private let searchNavBar = SearchNavBar()
     
     let stockTableView = UITableView()
     
@@ -39,20 +39,20 @@ extension HomeView {
         stockTableView.separatorStyle = .singleLine
         stockTableView.separatorColor = .systemGray5
         
-        addSubview(homeNavBar)
+        addSubview(searchNavBar)
         addSubview(stockTableView)
     }
     
     private func configureLayout() {
         
-        homeNavBar.snp.makeConstraints {
+        searchNavBar.snp.makeConstraints {
             $0.top.equalTo(safeAreaLayoutGuide)
             $0.horizontalEdges.equalTo(safeAreaLayoutGuide).inset(20)
             $0.height.equalTo(50)
         }
         
         stockTableView.snp.makeConstraints {
-            $0.top.equalTo(homeNavBar.snp.bottom).offset(20)
+            $0.top.equalTo(searchNavBar.snp.bottom).offset(20)
             $0.horizontalEdges.bottom.equalToSuperview()
         }
     }

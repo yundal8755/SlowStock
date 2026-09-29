@@ -54,7 +54,6 @@ extension HomeViewController {
     private func configureUI() {
         
         view.addSubview(homeView)
-        
         configureDataSource()
     }
     

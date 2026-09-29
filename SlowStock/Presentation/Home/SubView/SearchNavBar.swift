@@ -1,5 +1,5 @@
 //
-//  HomeNavBar.swift
+//  SearchNavBar.swift
 //  SlowStock
 //
 //  Created by mac on 9/18/26.
@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class HomeNavBar: UIView {
+class SearchNavBar: UIView {
     
     private let logo: UIImageView = {
         let image = UIImageView(image: UIImage(named: "SlowStockLogo"))
@@ -39,7 +39,7 @@ class HomeNavBar: UIView {
 
 // MARK: - UI Logics
 
-extension HomeNavBar {
+extension SearchNavBar {
     
     private func configureUI() {
         logo.contentMode = .scaleAspectFit
