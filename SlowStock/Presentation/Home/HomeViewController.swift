@@ -32,40 +32,29 @@ class HomeViewController: UIViewController {
             isPositive: false
         )
     ]
+    
+    let defaults = UserDefaults.standard
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        configureUI()
-        configureLayout()
-        
-        func updateStocks(_ stockData: [StockData]) {
-            self.stockData = stockData
-            homeView.stockTableView.reloadData()
-        }
-    }
-}
-
-
-// MARK: - Core Logics
-
-extension HomeViewController {
-    
-    private func configureUI() {
-        
         view.addSubview(homeView)
+
         configureDataSource()
-    }
-    
-    private func configureLayout() {
         
         homeView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
+        
+        updateStocks(self.stockData)
+    }
+    
+    func updateStocks(_ stockData: [StockData]) {
+        self.stockData = stockData
+        homeView.stockTableView.reloadData()
     }
     
     private func configureDataSource() {
-        
         homeView.stockTableView.dataSource = self
         
         homeView.stockTableView.register(
