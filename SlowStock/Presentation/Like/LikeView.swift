@@ -13,7 +13,6 @@ final class LikeView: UIView {
     private let searchBar = SearchNavBar()
     private let titleLabel = UILabel()
     private let subtitleLabel = UILabel()
-    let tableView = UITableView()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -31,28 +30,19 @@ final class LikeView: UIView {
 // MARK: - UI Logic
 
 extension LikeView {
-
-    func updateFavoriteCount(_ count: Int) {
-        subtitleLabel.text = "총 \(count)개"
-    }
     
     private func configureUI() {
         addSubview(searchBar)
         addSubview(titleLabel)
         addSubview(subtitleLabel)
-        addSubview(tableView)
         
         titleLabel.text = "좋아요"
         titleLabel.font = .systemFont(ofSize: 24)
         titleLabel.textColor = .label
         
-        subtitleLabel.text = "총 3개"
+        subtitleLabel.text = "총 0개"
         subtitleLabel.font = .systemFont(ofSize: 12)
         subtitleLabel.textColor = .label
-        
-        tableView.rowHeight = 80
-        tableView.separatorStyle = .singleLine
-        tableView.separatorColor = .systemGray5
     }
     
     private func configureLayout() {
@@ -70,12 +60,6 @@ extension LikeView {
         subtitleLabel.snp.makeConstraints {
             $0.top.equalTo(titleLabel.snp.bottom).offset(4)
             $0.leading.equalToSuperview().inset(20)
-        }
-        
-        tableView.snp.makeConstraints {
-            $0.top.equalTo(subtitleLabel.snp.bottom).offset(16)
-            $0.horizontalEdges.equalToSuperview().inset(20)
-            $0.bottom.equalTo(safeAreaLayoutGuide)
         }
     }
 }
