@@ -12,4 +12,5 @@ struct StockData {
     let price: String
     let change: String
     let isPositive: Bool
+    var isFavorite: Bool = false
 }

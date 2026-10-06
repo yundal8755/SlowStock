@@ -31,6 +31,10 @@ final class LikeView: UIView {
 // MARK: - UI Logic
 
 extension LikeView {
+
+    func updateFavoriteCount(_ count: Int) {
+        subtitleLabel.text = "총 \(count)개"
+    }
     
     private func configureUI() {
         addSubview(searchBar)
@@ -71,6 +75,7 @@ extension LikeView {
         tableView.snp.makeConstraints {
             $0.top.equalTo(subtitleLabel.snp.bottom).offset(16)
             $0.horizontalEdges.equalToSuperview().inset(20)
+            $0.bottom.equalTo(safeAreaLayoutGuide)
         }
     }
 }

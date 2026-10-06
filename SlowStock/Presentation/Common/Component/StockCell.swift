@@ -1,30 +1,42 @@
 //
-//  HomeStockCell.swift
+//  StockCell.swift
 //  SlowStock
 //
 //  Created by mac on 9/18/26.
 //
 
-import UIKit
 import SnapKit
+import UIKit
 
-final class HomeStockCell: UITableViewCell {
+final class StockCell: UITableViewCell {
 
     private let tickerLabel = UILabel()
     private let priceLabel = UILabel()
     private let changeLabel = UILabel()
     private let favoriteBtn = UIButton(type: .system)
 
+    var onFavoriteTapped: (() -> Void)?
+
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
         configureUI()
         configureLayout()
+        configureAction()
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        onFavoriteTapped = nil
+    }
+}
+
+// MARK: Core Logic
+extension StockCell {
 
     private func configureUI() {
         selectionStyle = .none
@@ -71,13 +83,37 @@ final class HomeStockCell: UITableViewCell {
         }
     }
 
+    private func configureAction() {
+
+        favoriteBtn.addAction(
+            UIAction { [weak self] _ in
+                self?.onFavoriteTapped?()
+            },
+            for: .touchUpInside
+        )
+    }
+
     func configure(with stockData: StockData) {
         tickerLabel.text = stockData.ticker
         priceLabel.text = stockData.price
         changeLabel.text = stockData.change
 
-        changeLabel.textColor = stockData.isPositive
+        changeLabel.textColor =
+            stockData.isPositive
             ? .systemGreen
             : .systemRed
+
+        favoriteBtn.setImage(
+            UIImage(
+                named: stockData.isFavorite
+                    ? "HeartFilled"
+                    : "HeartEmpty"
+            ),
+            for: .normal
+        )
+        
+        favoriteBtn.tintColor = stockData.isFavorite
+        ? .systemRed
+        : .secondaryLabel
     }
 }

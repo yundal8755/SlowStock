@@ -58,8 +58,8 @@ class HomeViewController: UIViewController {
         homeView.stockTableView.dataSource = self
         
         homeView.stockTableView.register(
-            HomeStockCell.self,
-            forCellReuseIdentifier: HomeStockCell.identifier
+            StockCell.self,
+            forCellReuseIdentifier: StockCell.identifier
         )
     }
 }
@@ -81,11 +81,21 @@ extension HomeViewController: UITableViewDataSource {
         cellForRowAt indexPath: IndexPath
     ) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(
-            withIdentifier: HomeStockCell.identifier,
+            withIdentifier: StockCell.identifier,
             for: indexPath
-        ) as! HomeStockCell
+        ) as! StockCell
 
         cell.configure(with: stockData[indexPath.row])
+
+        cell.onFavoriteTapped = { [weak self, weak cell] in
+            guard let self,
+                  let cell,
+                  let currentIndexPath = self.homeView.stockTableView.indexPath(for: cell)
+            else { return }
+
+            self.stockData[currentIndexPath.row].isFavorite.toggle()
+            cell.configure(with: self.stockData[currentIndexPath.row])
+        }
 
         return cell
     }
