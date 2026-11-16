@@ -12,8 +12,33 @@ final class MainTabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        tabBar.tintColor = .red
-        tabBar.unselectedItemTintColor = .systemGray
+        let appearance = UITabBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        appearance.backgroundColor = AppColor.background
+        appearance.shadowColor = AppColor.separator
+
+        let itemAppearances = [
+            appearance.stackedLayoutAppearance,
+            appearance.inlineLayoutAppearance,
+            appearance.compactInlineLayoutAppearance
+        ]
+        for itemAppearance in itemAppearances {
+            itemAppearance.normal.iconColor = AppColor.secondaryText
+            itemAppearance.normal.titleTextAttributes = [
+                .font: AppTypography.tabLabel,
+                .foregroundColor: AppColor.secondaryText
+            ]
+            itemAppearance.selected.iconColor = AppColor.selection
+            itemAppearance.selected.titleTextAttributes = [
+                .font: AppTypography.selectedTabLabel,
+                .foregroundColor: AppColor.selection
+            ]
+        }
+
+        tabBar.standardAppearance = appearance
+        tabBar.scrollEdgeAppearance = appearance
+        tabBar.tintColor = AppColor.selection
+        tabBar.unselectedItemTintColor = AppColor.secondaryText
     }
 
 }

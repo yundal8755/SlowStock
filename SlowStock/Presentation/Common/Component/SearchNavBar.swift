@@ -18,8 +18,9 @@ class SearchNavBar: UIView {
     
     private let searchBtn: UIButton = {
         let btn = UIButton(type: .system)
-        btn.setImage(UIImage(named: "SearchIcon"), for: .normal)
-        btn.tintColor = .label
+        btn.setImage(.iconSearch, for: .normal)
+        btn.tintColor = AppColor.text
+        btn.accessibilityLabel = "검색"
         
         return btn
     }()
@@ -55,6 +56,7 @@ extension SearchNavBar {
         
         searchBtn.snp.makeConstraints { make in
             make.trailing.centerY.equalToSuperview()
+            make.size.equalTo(44)
         }
     }
 }

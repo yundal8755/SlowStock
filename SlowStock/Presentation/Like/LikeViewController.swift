@@ -26,7 +26,7 @@ final class LikeViewController: UIViewController {
 extension LikeViewController {
     
     private func configureUI() {
-        view.backgroundColor = .white
+        view.backgroundColor = AppColor.background
         
         view.addSubview(likeView)
     }

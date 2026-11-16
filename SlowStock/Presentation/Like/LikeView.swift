@@ -37,12 +37,12 @@ extension LikeView {
         addSubview(subtitleLabel)
         
         titleLabel.text = "좋아요"
-        titleLabel.font = .systemFont(ofSize: 24)
-        titleLabel.textColor = .label
+        titleLabel.font = AppTypography.title
+        titleLabel.textColor = AppColor.text
         
         subtitleLabel.text = "총 0개"
-        subtitleLabel.font = .systemFont(ofSize: 12)
-        subtitleLabel.textColor = .label
+        subtitleLabel.font = AppTypography.caption
+        subtitleLabel.textColor = AppColor.secondaryText
     }
     
     private func configureLayout() {

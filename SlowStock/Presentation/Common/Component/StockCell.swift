@@ -40,17 +40,19 @@ extension StockCell {
 
     private func configureUI() {
         selectionStyle = .none
+        backgroundColor = AppColor.background
 
-        tickerLabel.font = .systemFont(ofSize: 20, weight: .bold)
+        tickerLabel.font = AppTypography.ticker
+        tickerLabel.textColor = AppColor.text
 
-        priceLabel.font = .systemFont(ofSize: 18)
+        priceLabel.font = AppTypography.price
+        priceLabel.textColor = AppColor.text
         priceLabel.textAlignment = .right
 
-        changeLabel.font = .systemFont(ofSize: 18)
+        changeLabel.font = AppTypography.change
         changeLabel.textAlignment = .right
 
-        favoriteBtn.setImage(UIImage(named: "HeartEmpty"), for: .normal)
-        favoriteBtn.tintColor = .secondaryLabel
+        favoriteBtn.accessibilityLabel = "관심 종목"
 
         contentView.addSubview(tickerLabel)
         contentView.addSubview(priceLabel)
@@ -98,22 +100,10 @@ extension StockCell {
         priceLabel.text = stockData.price
         changeLabel.text = stockData.change
 
-        changeLabel.textColor =
-            stockData.isPositive
-            ? .systemGreen
-            : .systemRed
+        changeLabel.textColor = stockData.isPositive ? AppColor.gain : AppColor.loss
 
-        favoriteBtn.setImage(
-            UIImage(
-                named: stockData.isFavorite
-                    ? "HeartFilled"
-                    : "HeartEmpty"
-            ),
-            for: .normal
-        )
-        
-        favoriteBtn.tintColor = stockData.isFavorite
-        ? .systemRed
-        : .secondaryLabel
+        favoriteBtn.setImage(stockData.isFavorite ? .iconStarFilled : .iconStar, for: .normal)
+        favoriteBtn.tintColor = stockData.isFavorite ? AppColor.favorite : AppColor.secondaryText
+        favoriteBtn.isSelected = stockData.isFavorite
     }
 }

@@ -33,11 +33,12 @@ class HomeView: UIView {
 extension HomeView {
     
     private func configureUI() {
-        backgroundColor = .white
+        backgroundColor = AppColor.background
 
+        stockTableView.backgroundColor = AppColor.background
         stockTableView.rowHeight = 80
         stockTableView.separatorStyle = .singleLine
-        stockTableView.separatorColor = .systemGray5
+        stockTableView.separatorColor = AppColor.separator
         
         addSubview(searchNavBar)
         addSubview(stockTableView)

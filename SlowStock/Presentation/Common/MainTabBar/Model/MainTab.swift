@@ -29,18 +29,18 @@ enum MainTabBarControllerCase {
     var image: UIImage? {
         switch self {
         case .home:
-            return .homeEmpty
+            return .iconHome
         case .like:
-            return .heartEmpty
+            return .iconStar
         }
     }
 
     var selectedImage: UIImage? {
         switch self {
         case .home:
-            return .homeFilled
+            return .iconHomeFilled
         case .like:
-            return .heartFilled
+            return .iconStarFilled
         }
     }
 }
