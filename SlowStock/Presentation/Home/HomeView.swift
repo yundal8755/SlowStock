@@ -10,7 +10,7 @@ import SnapKit
 
 class HomeView: UIView {
     
-    private let searchNavBar = SearchNavBar()
+    private let searchNavBar = MainAppBar()
     
     let stockTableView = UITableView()
     
