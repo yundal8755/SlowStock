@@ -49,7 +49,6 @@ extension HomeView {
         searchNavBar.snp.makeConstraints {
             $0.top.equalTo(safeAreaLayoutGuide)
             $0.horizontalEdges.equalToSuperview().inset(20)
-            $0.height.equalTo(50)
         }
         
         stockTableView.snp.makeConstraints {
