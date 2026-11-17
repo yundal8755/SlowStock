@@ -1,0 +1,101 @@
+//
+//  HomeViewController2.swift
+//  SlowStock
+//
+//  Created by mac on 11/17/26.
+//
+
+import UIKit
+import SnapKit
+
+class HomeViewController2: UIViewController {
+    private let homeView = HomeView()
+    
+    private var stockData: [StockData] = [
+        StockData(
+            ticker: "AAPLL",
+            price: "$227.82",
+            change: "+1.24%",
+            isPositive: true
+        ),
+        StockData(
+            ticker: "MSFT",
+            price: "$416.28",
+            change: "+0.73%",
+            isPositive: true
+        ),
+        StockData(
+            ticker: "AMZN",
+            price: "$201.12",
+            change: "-0.42%",
+            isPositive: false
+        )
+    ]
+    
+    let defaults = UserDefaults.standard
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        view.addSubview(homeView)
+
+        configureDataSource()
+        
+        homeView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
+        
+        updateStocks(self.stockData)
+    }
+    
+    func updateStocks(_ stockData: [StockData]) {
+        self.stockData = stockData
+        homeView.stockTableView.reloadData()
+    }
+    
+    private func configureDataSource() {
+        homeView.stockTableView.dataSource = self
+        
+        homeView.stockTableView.register(
+            StockCell.self,
+            forCellReuseIdentifier: StockCell.identifier
+        )
+    }
+}
+
+
+// MARK: - DataSource
+
+extension HomeViewController2: UITableViewDataSource {
+
+    func tableView(
+        _ tableView: UITableView,
+        numberOfRowsInSection section: Int
+    ) -> Int {
+        stockData.count
+    }
+
+    func tableView(
+        _ tableView: UITableView,
+        cellForRowAt indexPath: IndexPath
+    ) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(
+            withIdentifier: StockCell.identifier,
+            for: indexPath
+        ) as! StockCell
+
+        cell.configure(with: stockData[indexPath.row])
+
+        cell.onFavoriteTapped = { [weak self, weak cell] in
+            guard let self,
+                  let cell,
+                  let currentIndexPath = self.homeView.stockTableView.indexPath(for: cell)
+            else { return }
+
+            self.stockData[currentIndexPath.row].isFavorite.toggle()
+            cell.configure(with: self.stockData[currentIndexPath.row])
+        }
+
+        return cell
+    }
+}
