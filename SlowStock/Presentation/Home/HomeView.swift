@@ -10,15 +10,16 @@ import SnapKit
 
 class HomeView: UIView {
     
-    private let searchNavBar = MainAppBar()
+    private let mainAppBar = MainAppBar()
     
     let stockTableView = UITableView()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        configureUI()
+        configureHierachy()
         configureLayout()
+        configureUI()
     }
     
     // 해당 view는 Storyboard로 생성되는 방식을 지원하지 않는다는 뜻
@@ -32,6 +33,23 @@ class HomeView: UIView {
 
 extension HomeView {
     
+    private func configureHierachy() {
+        addSubview(mainAppBar)
+        addSubview(stockTableView)
+    }
+    
+    private func configureLayout() {
+        mainAppBar.snp.makeConstraints {
+            $0.top.equalTo(safeAreaLayoutGuide)
+            $0.horizontalEdges.equalToSuperview().inset(20)
+        }
+        
+        stockTableView.snp.makeConstraints {
+            $0.top.equalTo(mainAppBar.snp.bottom).offset(20)
+            $0.horizontalEdges.bottom.equalToSuperview()
+        }
+    }
+    
     private func configureUI() {
         backgroundColor = AppColor.background
 
@@ -39,21 +57,5 @@ extension HomeView {
         stockTableView.rowHeight = 80
         stockTableView.separatorStyle = .singleLine
         stockTableView.separatorColor = AppColor.separator
-        
-        addSubview(searchNavBar)
-        addSubview(stockTableView)
-    }
-    
-    private func configureLayout() {
-        
-        searchNavBar.snp.makeConstraints {
-            $0.top.equalTo(safeAreaLayoutGuide)
-            $0.horizontalEdges.equalToSuperview().inset(20)
-        }
-        
-        stockTableView.snp.makeConstraints {
-            $0.top.equalTo(searchNavBar.snp.bottom).offset(20)
-            $0.horizontalEdges.bottom.equalToSuperview()
-        }
     }
 }
