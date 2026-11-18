@@ -12,7 +12,7 @@ class HomeView: UIView {
     
     private let mainAppBar = MainAppBar()
     
-    let stockTableView = UITableView()
+    let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout())
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -35,27 +35,68 @@ extension HomeView {
     
     private func configureHierachy() {
         addSubview(mainAppBar)
-        addSubview(stockTableView)
+        addSubview(collectionView)
     }
     
     private func configureLayout() {
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        
         mainAppBar.snp.makeConstraints {
             $0.top.equalTo(safeAreaLayoutGuide)
             $0.horizontalEdges.equalToSuperview().inset(20)
         }
         
-        stockTableView.snp.makeConstraints {
-            $0.top.equalTo(mainAppBar.snp.bottom).offset(20)
-            $0.horizontalEdges.bottom.equalToSuperview()
-        }
+        NSLayoutConstraint.activate([
+            collectionView.topAnchor.constraint(equalTo: mainAppBar.bottomAnchor, constant: 24),
+            collectionView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+            collectionView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            collectionView.trailingAnchor.constraint(equalTo: trailingAnchor),
+        ])
     }
     
     private func configureUI() {
         backgroundColor = AppColor.background
+    }
+    
+    private func registCell() {
+        self.collectionView.register(TopMoneyCollectionViewCell.self, forCellWithReuseIdentifier: TopMoneyCollectionViewCell.identi)
+    }
+}
 
-        stockTableView.backgroundColor = AppColor.background
-        stockTableView.rowHeight = 80
-        stockTableView.separatorStyle = .singleLine
-        stockTableView.separatorColor = AppColor.separator
+final class TopMoneyCollectionViewCell: UICollectionViewCell {
+    
+    static let identi: String = "TopMoneyCollectionViewCell"
+    
+    private let firstText = UILabel()
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        setHierachy()
+        setLayout()
+        setUI()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func setHierachy() {
+        self.contentView.addSubview(firstText)
+    }
+    
+    private func setLayout() {
+        firstText.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            firstText.centerXAnchor.constraint(equalTo: centerXAnchor),
+            firstText.centerYAnchor.constraint(equalTo: centerYAnchor),
+        ])
+    }
+
+    private func setUI() {
+        firstText.text = "$124,532.80"
+        firstText.font = .systemFont(ofSize: 50)
+        self.contentView.backgroundColor = .red
     }
 }
