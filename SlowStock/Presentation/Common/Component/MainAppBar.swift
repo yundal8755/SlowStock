@@ -23,19 +23,19 @@ class MainAppBar: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        configureHierachy()
-        configureLayout()
-        configureUI()
+        setupHierachy()
+        setupLayout()
+        setupUI()
     }
     
-    private func configureHierachy() {
+    private func setupHierachy() {
         addSubview(textStack)
         addSubview(profileImage)
         addSubview(searchBtn)
         addSubview(alarmBtn)
     }
     
-    private func configureLayout() {
+    private func setupLayout() {
         profileImage.translatesAutoresizingMaskIntoConstraints = false
         greetMessage.translatesAutoresizingMaskIntoConstraints = false
         appTitleText.translatesAutoresizingMaskIntoConstraints = false
@@ -60,7 +60,7 @@ class MainAppBar: UIView {
         ])
     }
     
-    private func configureUI() {
+    private func setupUI() {
 //        backgroundColor = .blue
         
         greetMessage.text = "좋은 아침"

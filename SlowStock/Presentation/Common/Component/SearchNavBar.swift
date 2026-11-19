@@ -28,8 +28,8 @@ class SearchNavBar: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        configureUI()
-        configureLayout()
+        setupUI()
+        setupLayout()
     }
     
     required init?(coder: NSCoder) {
@@ -42,14 +42,14 @@ class SearchNavBar: UIView {
 
 extension SearchNavBar {
     
-    private func configureUI() {
+    private func setupUI() {
         logo.contentMode = .scaleAspectFit
         
         addSubview(logo)
         addSubview(searchBtn)
     }
     
-    private func configureLayout() {
+    private func setupLayout() {
         logo.snp.makeConstraints {
             $0.leading.centerY.equalToSuperview()
         }

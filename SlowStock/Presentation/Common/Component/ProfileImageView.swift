@@ -10,7 +10,6 @@ import UIKit
 class ProfileImageView: UIView {
     
     private let imageView = UIImageView()
-//    private let emptyImage = UIImage(systemName: "person.fill")
     
     required init(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -19,16 +18,16 @@ class ProfileImageView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        configureHierachy()
-        configureLayout()
-        configureUI()
+        setupHierachy()
+        setupLayout()
+        setupUI()
     }
     
-    func configureHierachy() {
+    private func setupHierachy() {
         self.addSubview(imageView)
     }
     
-    func configureLayout() {
+    private func setupLayout() {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
@@ -41,7 +40,7 @@ class ProfileImageView: UIView {
         ])
     }
     
-    func configureUI() {
+    private func setupUI() {
         imageView.image = UIImage(resource: .dummyImg)
         imageView.contentMode = .scaleAspectFill
         imageView.backgroundColor = .red

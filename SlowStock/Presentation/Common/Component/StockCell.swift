@@ -20,9 +20,9 @@ final class StockCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
-        configureUI()
-        configureLayout()
-        configureAction()
+        setupUI()
+        setupLayout()
+        setupAction()
     }
 
     required init?(coder: NSCoder) {
@@ -38,7 +38,7 @@ final class StockCell: UITableViewCell {
 // MARK: Core Logic
 extension StockCell {
 
-    private func configureUI() {
+    private func setupUI() {
         selectionStyle = .none
         backgroundColor = AppColor.background
 
@@ -60,7 +60,7 @@ extension StockCell {
         contentView.addSubview(favoriteBtn)
     }
 
-    private func configureLayout() {
+    private func setupLayout() {
         tickerLabel.snp.makeConstraints {
             $0.leading.equalToSuperview().inset(16)
             $0.centerY.equalToSuperview()
@@ -85,7 +85,7 @@ extension StockCell {
         }
     }
 
-    private func configureAction() {
+    private func setupAction() {
 
         favoriteBtn.addAction(
             UIAction { [weak self] _ in

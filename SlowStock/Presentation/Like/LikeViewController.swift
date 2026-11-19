@@ -15,8 +15,8 @@ final class LikeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        configureUI()
-        configureLayout()
+        setupUI()
+        setupLayout()
     }
 }
 
@@ -25,13 +25,13 @@ final class LikeViewController: UIViewController {
 
 extension LikeViewController {
     
-    private func configureUI() {
+    private func setupUI() {
         view.backgroundColor = AppColor.background
         
         view.addSubview(likeView)
     }
     
-    private func configureLayout() {
+    private func setupLayout() {
         likeView.snp.makeConstraints {
             $0.edges.equalTo(view.safeAreaLayoutGuide)
         }

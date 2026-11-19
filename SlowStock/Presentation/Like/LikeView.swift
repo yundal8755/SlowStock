@@ -17,8 +17,8 @@ final class LikeView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        configureUI()
-        configureLayout()
+        setupUI()
+        setupLayout()
     }
     
     required init?(coder: NSCoder) {
@@ -31,7 +31,7 @@ final class LikeView: UIView {
 
 extension LikeView {
     
-    private func configureUI() {
+    private func setupUI() {
         addSubview(searchBar)
         addSubview(titleLabel)
         addSubview(subtitleLabel)
@@ -45,7 +45,7 @@ extension LikeView {
         subtitleLabel.textColor = AppColor.secondaryText
     }
     
-    private func configureLayout() {
+    private func setupLayout() {
         searchBar.snp.makeConstraints {
             $0.top.equalTo(safeAreaLayoutGuide)
             $0.horizontalEdges.equalToSuperview().inset(20)
