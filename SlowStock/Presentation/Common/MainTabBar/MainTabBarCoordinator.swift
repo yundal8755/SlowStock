@@ -19,7 +19,7 @@ final class MainTabBarCoordinator: Coordinator {
     func start() {
         let tabBarController = MainTabBarController()
         
-        let homeVc = HomeViewController2()
+        let homeVc = HomeViewController()
         let likeVc = LikeViewController()
         
         tabBarController.setVCs([

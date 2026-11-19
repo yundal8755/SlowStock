@@ -17,12 +17,11 @@ class HomeView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        configureHierachy()
-        configureLayout()
-        configureUI()
+        setupHierachy()
+        setupLayout()
+        setupUI()
     }
     
-    // 해당 view는 Storyboard로 생성되는 방식을 지원하지 않는다는 뜻
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -33,12 +32,12 @@ class HomeView: UIView {
 
 extension HomeView {
     
-    private func configureHierachy() {
+    private func setupHierachy() {
         addSubview(mainAppBar)
         addSubview(collectionView)
     }
     
-    private func configureLayout() {
+    private func setupLayout() {
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         
         mainAppBar.snp.makeConstraints {
@@ -54,49 +53,12 @@ extension HomeView {
         ])
     }
     
-    private func configureUI() {
+    private func setupUI() {
         backgroundColor = AppColor.background
-    }
-    
-    private func registCell() {
-        self.collectionView.register(TopMoneyCollectionViewCell.self, forCellWithReuseIdentifier: TopMoneyCollectionViewCell.identi)
-    }
-}
-
-final class TopMoneyCollectionViewCell: UICollectionViewCell {
-    
-    static let identi: String = "TopMoneyCollectionViewCell"
-    
-    private let firstText = UILabel()
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
         
-        setHierachy()
-        setLayout()
-        setUI()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    private func setHierachy() {
-        self.contentView.addSubview(firstText)
-    }
-    
-    private func setLayout() {
-        firstText.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            firstText.centerXAnchor.constraint(equalTo: centerXAnchor),
-            firstText.centerYAnchor.constraint(equalTo: centerYAnchor),
-        ])
-    }
-
-    private func setUI() {
-        firstText.text = "$124,532.80"
-        firstText.font = .systemFont(ofSize: 50)
-        self.contentView.backgroundColor = .red
+        self.collectionView.register(
+            FirstSectionCollectionViewCell.self,
+            forCellWithReuseIdentifier: FirstSectionCollectionViewCell.id
+        )
     }
 }
